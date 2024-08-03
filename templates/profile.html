@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Dashboard | Advance Face Recognition</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="/static/image-asset/icons/favicon.ico" type="image/x-icon"/>
+
+	<!-- Fonts and icons -->
+	<script src="/static/dashboard_assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Lato:300,400,700,900"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['/static/dashboard_assets/css/fonts.min.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="/static/dashboard_assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/dashboard_assets/css/atlantis.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="/static/dashboard_assets/css/demo.css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="blue">
+
+				<a href="index.html" class="logo" style="color: white">
+					<img src="/static/image-asset/icons/logo.png" height=50 alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<span style="color: white">FACE RECOGNITION SYSTEM</span>
+					</div>
+					
+				</div>
+			</nav>
+			<!-- End Navbar -->
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2">
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="/static/dashboard_assets/img/profile.png" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									{{user.name}}
+									<span class="user-level">Administrator</span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						<li class="nav-item">
+							<a href="/" aria-expanded="false">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{url_for('attendance')}}">
+								<i class="fas fa-pen-square"></i>
+								<p>Attendance</p>
+							</a>
+						</li>
+						<li class="nav-item active">
+							<a href="/all_users/">
+								<i class="fas fa-users"></i>
+								<p>Manage</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/add_user/">
+								<i class="fas fa-user-plus"></i>
+								<p>Add User</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/add_admin/">
+								<i class="fas fa-pen-square"></i>
+								<p>Add Admin</p>
+							</a>
+						</li>
+						<li class="mx-4 mt-2">
+							<a href="/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-sign-out"></i> </span>LOGOUT</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+
+							<div class="ml-md-auto py-2 py-md-0">
+<!--								<a href="/all_users/" class="btn btn-white btn-border btn-round mr-2">Manage</a>-->
+<!--								<a href="/add_user/" class="btn btn-secondary btn-round">Add Customer</a>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			  <div class="page-inner mt--5">
+			<div class="row" >
+			   <div class="text-center">
+                   <div class="card .mx-auto" style="width: 18rem;">
+					   <img class="card-img-top" src="data:;base64,{{ image | safe }}" alt="Card image cap">
+					   <div class="card-body">
+						   <h5 style = "margin-bottom: 0.05rem;" class="card-title mb-2 fw-mediumbold">{{ user[0] }}</h5>
+						   <p style = "margin-bottom: 0.05rem;" class="card-text"><strong>Branch:</strong>{{user[2]}}</p>
+						   <p style = "margin-bottom: 0.05rem;" class="card-text"><strong>ID:</strong> {{user[1]}}</p>
+						   <p style = "margin-bottom: 0.05rem;" class="card-text"><strong>Mail:</strong> {{user[4]}}</p>
+						   <p style = "margin-bottom: 0.05rem;" class="card-text"><strong>Parent Name:</strong> {{user[5]}}</p>
+						   <p style = "margin-bottom: 0.05rem;" class="card-text"><strong>Parent Mail:</strong> {{user[6]}}</p>
+						   <a href="javascript:confirm_deletion('{{ user[1]}}')" class="btn btn-danger">Delete</a>
+					   </div>
+				   </div>
+			   </div>
+
+			   <div class="text-center">
+					<div class="card .mx-auto" style="width: 24rem;margin-left:5px;margin-right:5px;">
+						
+						<div class="card-body">
+							<h5 class="card-title mb-2 fw-mediumbold">Issues</h5>
+
+							<form method="post" action="/update_issue">
+								<label for="studentid">Student ID:</label><br>
+  								<input type="text" id="studentid" name="studentid" style="width:90%" value="{{user[1]}}" readonly><br>
+
+								<label for="issues">Issue Detail:</label><br>
+								<textarea rows="12" cols="40" id="issues" name="issues">{{user[7]}}</textarea>
+
+								<button class="btn btn-success" type="submit">Update Issue</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="text-center">
+					
+				</div>
+
+				<div class="card" style="margin-left: 20px !important; width:100%">
+				<div class="card-header">
+					<h4 class="card-title" style="display: inline-block">Attendance Table</h4>
+					<a class="float-right btn btn-primary" href="{{url_for('download_specific', rollno=rollno)}}" style="color: white">Attendance</a>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="multi-filter-select" class="display table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Class 1</th>
+									<th>Class 2</th>
+									<th>Class 3</th>
+									<th>Class 4</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Date</th>
+									<th>Class 1</th>
+									<th>Class 2</th>
+									<th>Class 3</th>
+									<th>Class 4</th>
+								</tr>
+							</tfoot>
+							<tbody>
+							{% for i in attendance %}
+								<tr>
+									<td>{{i[0]}}-{{i[1]}}-{{i[2]}}</td>
+									<td>{{i[3]}}</td>
+									<td>{{i[4]}}</td>
+									<td>{{i[5]}}</td>
+									<td>{{i[6]}}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			</div>
+
+			<footer class="footer">
+				<div class="container-fluid">
+				 <!---  <div class="copyright ml-auto">
+						&copy; <script>document.write(new Date().getFullYear())</script>,
+					<a href="http://niltech.in/" target="_blank">Niltech Pvt Ltd</a> | Nugatory Inherits Luminescence Technologies Private Limited.
+					</div> --->
+				</div> 
+			</footer>
+		</div>
+
+		<!-- Custom template | don't include it in your project! -->		<!-- End Custom template -->
+	</div>
+
+	<script>
+		function confirm_deletion(rollno) {
+			let data = confirm("are you sure you want to delete")
+			console.log(data)
+			if (data){
+				$.getJSON("/delete_user/"+rollno, value=>{
+					if (value["data"]){
+						alert("User deleted Successfully")
+						window.location.href = "{{url_for('all_users')}}"
+					}
+					else {
+						alert("user deletion failed")
+					}
+				})
+			}
+		}
+	</script>
+	<!--   Core JS Files   -->
+	<script src="/static/dashboard_assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="/static/dashboard_assets/js/core/popper.min.js"></script>
+	<script src="/static/dashboard_assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="/static/dashboard_assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="/static/dashboard_assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="/static/dashboard_assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+	<!-- Chart JS -->
+	<script src="/static/dashboard_assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="/static/dashboard_assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Chart Circle -->
+	<script src="/static/dashboard_assets/js/plugin/chart-circle/circles.min.js"></script>
+
+	<!-- Datatables -->
+	<script src="/static/dashboard_assets/js/plugin/datatables/datatables.min.js"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="/static/dashboard_assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="/static/dashboard_assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="/static/dashboard_assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="/static/dashboard_assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="/static/dashboard_assets/js/atlantis.min.js"></script>
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/dashboard_assets/js/setting-demo.js"></script>
+	<script src="/static/dashboard_assets/js/demo.js"></script>
+</div>
+	</div>
+<script>
+	$(document).ready(()=> {
+		$('#multi-filter-select').DataTable({
+			"pageLength": 5,
+			initComplete: function () {
+				this.api().columns().every(function () {
+					var column = this;
+					var select = $('<select class="form-control"><option value=""></option></select>')
+							.appendTo($(column.footer()).empty())
+							.on('change', function () {
+								var val = $.fn.dataTable.util.escapeRegex(
+										$(this).val()
+								);
+
+								column
+										.search(val ? '^' + val + '$' : '', true, false)
+										.draw();
+							});
+
+					column.data().unique().sort().each(function (d, j) {
+						select.append('<option value="' + d + '">' + d + '</option>')
+					});
+				});
+			}
+		});
+	})
+	</script>
+</body>
+</html>
